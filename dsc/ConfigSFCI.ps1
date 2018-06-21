@@ -132,6 +132,14 @@ configuration ConfigSFCI
             Credential = $DomainCreds
 	        DependsOn = "[xWaitForADDomain]DscForestWait"
         }
+	
+	xCluster FailoverCluster
+        {
+            Name = $ClusterName
+            DomainAdministratorCredential = $DomainCreds
+            Nodes = $Nodes
+	    DependsOn = "[Script]MoveClusterGroups0"
+        }
 
         Script MoveClusterGroups0
         {
@@ -140,15 +148,7 @@ configuration ConfigSFCI
             GetScript = '@{Result = "Moved Cluster Group"}'
             DependsOn = "[xComputer]DomainJoin"
         }
-
-        xCluster FailoverCluster
-        {
-            Name = $ClusterName
-            DomainAdministratorCredential = $DomainCreds
-            Nodes = $Nodes
-	        DependsOn = "[Script]MoveClusterGroups0"
-        }
-
+      
         Script CloudWitness
         {
             SetScript = "Set-ClusterQuorum -CloudWitness -AccountName ${witnessStorageName} -AccessKey $($witnessStorageKey.GetNetworkCredential().Password)"
