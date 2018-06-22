@@ -69,7 +69,7 @@ configuration ConfigSFCI
         LocalConfigurationManager
         {
             DebugMode = "ForceModuleImport"
-            RebootNodeIfNeeded = $true
+            RebootNodeIfNeeded = $false
         }
         
         WindowsFeature FC
