@@ -145,6 +145,7 @@
     "witnessStorageName": "[concat('sastdsfci',parameters('clusterNumber'),uniqueString(resourceGroup().id) )]",
     "witnessStorageType": "Standard_LRS",
     "vmNamePrefix": "[concat(parameters('namePrefix'),'')]",
+    "vmName": "[parameters('namePrefix')]",
     "vmAvailabilitySetName": "[concat(variables('vmNamePrefix'),'as')]",
     "clusterName": "[concat(parameters('namePrefix'),'')]",
     "sqlClusterName": "[concat(parameters('sqlClusterName'),'12')]",
@@ -343,7 +344,7 @@
         "name": "virtualMachineLoop",
         "count": "[parameters('vmCount')]"
       },
-      "name": "[concat(variables('vmNamePrefix'),parameters('iteration')[copyIndex()],'-newVM')]",
+      "name": "[concat(variables('vmNamePrefix'),parameters('iteration')[copyIndex()])]",
       "dependsOn": [
         "nicLoop",
         "[resourceId('Microsoft.Compute/availabilitySets', variables('vmAvailabilitySetName'))]"
